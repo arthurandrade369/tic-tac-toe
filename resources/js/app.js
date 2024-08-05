@@ -4,7 +4,7 @@ const circleRect = 'imgs/rectangle-circle.svg';
 const rects = handleRects();
 let gameTurn = 'X';
 const winCombinations = [
-    ['11', '12', '23'], ['21', '22', '23'], ['31', '32', '33'],
+    ['11', '12', '13'], ['21', '22', '23'], ['31', '32', '33'],
     ['11', '22', '33'], ['13', '22', '31'], ['11', '21', '31'],
     ['12', '22', '32'], ['13', '23', '33']
 ];
@@ -52,6 +52,7 @@ function handleGameTurn(rect) {
     rect.filledSrc = gameTurn;
     rect.isFilled = true;
     checkWinner();
+    checkDraw();
     gameTurn = gameTurn === 'X' ? 'O' : 'X';
 }
 
@@ -68,4 +69,11 @@ function checkWinner() {
             }
         }
     });
+}
+
+function checkDraw() {
+    if (rects.every(rect => rect.isFilled)) {
+        alert("It's a draw!");
+        location.reload();
+    }
 }
